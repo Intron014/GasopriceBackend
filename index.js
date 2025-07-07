@@ -1,13 +1,16 @@
 const express = require('express');
 const axios = require('axios');
 const { createClient } = require('redis');
+const cors = require('cors');
 
 const REDIS_URL = process.env.REDIS_URL || 'redis://localhost:6379';
 const CACHE_KEY = 'stations_data';
 const CACHE_TTL = 60 * 30;
 const API_URL = 'https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestres/';
 
+
 const app = express();
+app.use(cors());
 const port = process.env.PORT || 3000;
 
 const redisClient = createClient({ url: REDIS_URL });
